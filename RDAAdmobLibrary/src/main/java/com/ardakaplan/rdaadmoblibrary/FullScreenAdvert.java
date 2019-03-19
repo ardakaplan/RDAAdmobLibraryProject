@@ -6,18 +6,27 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import static com.ardakaplan.rdaadmoblibrary.TestDeviceIDs.TEST_DEVICE_IDS;
 
 /**
  * Created by Arda Kaplan on 10.07.2018 - 16:27
  */
+@Singleton
 public class FullScreenAdvert {
 
+    private Context context;
     private InterstitialAd interstitialAd;
-
     private AdRequest.Builder adRequestBuilder;
 
-    FullScreenAdvert(Context context, String adID, AdListener adListener) {
+    @Inject
+    FullScreenAdvert(Context context) {
+        this.context = context;
+    }
+
+    public void setup(String adID, AdListener adListener) {
 
         interstitialAd = new InterstitialAd(context);
 

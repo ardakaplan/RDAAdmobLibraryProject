@@ -12,6 +12,7 @@ import static com.ardakaplan.rdaadmoblibrary.TestDeviceIDs.TEST_DEVICE_IDS;
 /**
  * Created by Arda Kaplan on 2.07.2018 - 16:23
  */
+@Deprecated
 public class RewardedVideoAdvert {
 
     private RewardedVideoAd rewardedVideoAd;

@@ -1,1 +1,1 @@
-include ':app', ':rdaadmoblibrarytestlib',':RDAAdmobLibrary'
+include ':app',':RDAAdmobLibrary'
