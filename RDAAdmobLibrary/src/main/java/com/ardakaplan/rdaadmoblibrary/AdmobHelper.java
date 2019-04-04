@@ -2,16 +2,12 @@ package com.ardakaplan.rdaadmoblibrary;
 
 import android.content.Context;
 
-import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-
-import static com.ardakaplan.rdaadmoblibrary.TestDeviceIDs.TEST_DEVICE_IDS;
 
 /**
  * Created by Arda Kaplan on 31.03.2018 - 19:49
@@ -24,6 +20,7 @@ import static com.ardakaplan.rdaadmoblibrary.TestDeviceIDs.TEST_DEVICE_IDS;
 public class AdmobHelper {
 
     private Context context;
+    private String[] testDeviceIds;
 
     @Inject
     AdmobHelper(Context context) {
@@ -31,7 +28,9 @@ public class AdmobHelper {
         this.context = context;
     }
 
-    public void init(String adMobId) {
+    public void init(String[] testDeviceIds, String adMobId) {
+
+        this.testDeviceIds = testDeviceIds;
 
         MobileAds.initialize(context, adMobId);
     }
@@ -40,7 +39,7 @@ public class AdmobHelper {
 
         AdRequest.Builder adRequestBuilder = new AdRequest.Builder();
 
-        for (String TEST_DEVICE_ID : TEST_DEVICE_IDS) {
+        for (String TEST_DEVICE_ID : testDeviceIds) {
 
             adRequestBuilder.addTestDevice(TEST_DEVICE_ID);
         }

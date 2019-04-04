@@ -9,8 +9,6 @@ import com.google.android.gms.ads.InterstitialAd;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import static com.ardakaplan.rdaadmoblibrary.TestDeviceIDs.TEST_DEVICE_IDS;
-
 /**
  * Created by Arda Kaplan on 10.07.2018 - 16:27
  */
@@ -26,7 +24,7 @@ public class FullScreenAdvert {
         this.context = context;
     }
 
-    public void setup(String adID, AdListener adListener) {
+    public void setup(String[] testDeviceIds, String adID, AdListener adListener) {
 
         interstitialAd = new InterstitialAd(context);
 
@@ -34,7 +32,7 @@ public class FullScreenAdvert {
 
         adRequestBuilder = new AdRequest.Builder();
 
-        for (String TEST_DEVICE_ID : TEST_DEVICE_IDS) {
+        for (String TEST_DEVICE_ID : testDeviceIds) {
 
             adRequestBuilder.addTestDevice(TEST_DEVICE_ID);
         }

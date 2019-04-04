@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import com.ardakaplan.rdaadmoblibrary.AdmobHelper;
 import com.ardakaplan.rdaadmoblibrary.FullScreenAdvert;
+import com.ardakaplan.rdaadmoblibrary.TestDeviceIDs;
 import com.ardakaplan.rdalibrary.base.ui.screen.RDAActivity;
 import com.ardakaplan.rdalogger.RDALogger;
 import com.google.android.gms.ads.AdListener;
@@ -31,11 +32,11 @@ public class MainActivity extends RDAActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.activity_main);
 
-        admobHelper.init("ca-app-pub-5797080226538350~6946865820");
+        admobHelper.init(TestDeviceIDs.getTestDeviceIds(), "ca-app-pub-5797080226538350~6368377047");
 
         admobHelper.startBannerAd(mAdView);
 
-        fullScreenAdvert.setup("ca-app-pub-3940256099942544/1033173712", new AdListener() {
+        fullScreenAdvert.setup(TestDeviceIDs.getTestDeviceIds(), "ca-app-pub-3940256099942544/1033173712", new AdListener() {
 
             @Override
             public void onAdLoaded() {
