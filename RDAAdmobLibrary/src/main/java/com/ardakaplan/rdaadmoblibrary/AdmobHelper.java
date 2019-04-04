@@ -1,6 +1,5 @@
 package com.ardakaplan.rdaadmoblibrary;
 
-import android.app.Activity;
 import android.content.Context;
 
 import com.google.android.gms.ads.AdListener;
@@ -8,6 +7,9 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.reward.RewardedVideoAdListener;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import static com.ardakaplan.rdaadmoblibrary.TestDeviceIDs.TEST_DEVICE_IDS;
 
@@ -18,72 +20,59 @@ import static com.ardakaplan.rdaadmoblibrary.TestDeviceIDs.TEST_DEVICE_IDS;
  * <p>
  * www.ardakaplan.com
  */
+@Singleton
 public class AdmobHelper {
 
-    private static boolean isInitialized = false;
+    private Context context;
 
-    public static void init(Activity activity, String adMobId) {
+    @Inject
+    AdmobHelper(Context context) {
 
-        MobileAds.initialize(activity, adMobId);
-
-        isInitialized = true;
+        this.context = context;
     }
 
-    public static void startBannerAd(Activity activity, int adViewId) {
+    public void init(String adMobId) {
 
+        MobileAds.initialize(context, adMobId);
+    }
 
-        if (isInitialized) {
+    public void startBannerAd(AdView adViewBanner) {
 
-            AdView adViewBanner = activity.findViewById(adViewId);
+        AdRequest.Builder adRequestBuilder = new AdRequest.Builder();
 
-            AdRequest.Builder adRequestBuilder = new AdRequest.Builder();
+        for (String TEST_DEVICE_ID : TEST_DEVICE_IDS) {
 
-            for (String TEST_DEVICE_ID : TEST_DEVICE_IDS) {
-
-                adRequestBuilder.addTestDevice(TEST_DEVICE_ID);
-            }
-
-            adViewBanner.loadAd(adRequestBuilder.build());
-
-            adViewBanner.setAdListener(new AdListener() {
-
-                @Override
-                public void onAdFailedToLoad(int i) {
-                    super.onAdFailedToLoad(i);
-                }
-            });
-
-        } else {
-
-//            RDALogger.warn("********First set adMobId***********");
+            adRequestBuilder.addTestDevice(TEST_DEVICE_ID);
         }
+
+        adViewBanner.loadAd(adRequestBuilder.build());
     }
 
-    public static FullScreenAdvert createFullScreenAdvert(Context context, String adID, AdListener adListener) {
+//    public static FullScreenAdvert createFullScreenAdvert(Context context, String adID, AdListener adListener) {
+//
+//        if (isInitialized) {
+//
+//            return new FullScreenAdvert(context, adID, adListener);
+//
+//        } else {
+//
+////            RDALogger.warn("********First set adMobId***********");
+//
+//            return null;
+//        }
+//    }
 
-        if (isInitialized) {
-
-            return new FullScreenAdvert(context, adID, adListener);
-
-        } else {
-
-//            RDALogger.warn("********First set adMobId***********");
-
-            return null;
-        }
-    }
-
-    public static RewardedVideoAdvert createRewardedVideoAdvert(Context context, String adID, RewardedVideoAdListener rewardedVideoAdListener) {
-
-        if (isInitialized) {
-
-            return new RewardedVideoAdvert(context, adID, rewardedVideoAdListener);
-
-        } else {
-
-//            RDALogger.warn("********First set adMobId***********");
-
-            return null;
-        }
-    }
+//    public static RewardedVideoAdvert createRewardedVideoAdvert(Context context, String adID, RewardedVideoAdListener rewardedVideoAdListener) {
+//
+//        if (isInitialized) {
+//
+//            return new RewardedVideoAdvert(context, adID, rewardedVideoAdListener);
+//
+//        } else {
+//
+////            RDALogger.warn("********First set adMobId***********");
+//
+//            return null;
+//        }
+//    }
 }
